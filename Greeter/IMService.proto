@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.im.IMService";
+option java_outer_classname = "IMProto";
+
+package Greeter;
+
+service IMService{
+    rpc Create(CreateGroup)returns(GroupResult){}
+    rpc UpdateName(UpdateGroupName) returns (GroupResult){}
+    rpc Delete(GroupId)returns (GroupResult){}
+    rpc AddMember(AddMembers)returns (GroupResult){}
+    rpc Out(OutGroup)returns (GroupResult){}
+    rpc RemoveMember(RemoveMembers)returns (GroupResult){}
+    rpc SendPeer(Peers)returns (GroupResult){}
+    rpc SendGroup(Groups)returns (GroupResult){}
+    rpc SendSystem(Systems)returns (GroupResult){}
+}
+message CreateGroup{
+  int32 master = 1;
+  string name = 2;
+  bool super = 3;
+  string members = 4;
+}
+message GroupResult{
+  string group_id = 1;
+  bool stauts = 2;
+}
+message UpdateGroupName {
+  int32 group_id = 1;
+  string name = 2;
+}
+message GroupId {
+  int32 group_id = 1;
+}
+message AddMembers{
+  int32 group_id = 1;
+  string uid = 2;
+}
+message OutGroup{
+  int32 group_id = 1;
+  string uid = 2;
+}
+message RemoveMembers{
+  int32 group_id = 1;
+  string uid = 2;
+}
+message Peers{
+  string sender = 1;
+  string receiver = 2;
+  string content = 3;
+}
+message Groups{
+  string sender = 1;
+  string group_id= 2;
+  string content = 3;
+}
+message Systems{
+  string receiver = 1;
+  string content = 2;
+}
